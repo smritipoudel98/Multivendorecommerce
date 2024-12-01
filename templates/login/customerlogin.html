@@ -1,0 +1,165 @@
+{% extends '../index.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="templates/login/style.css">
+{% endblock %}
+{% block content %}
+<!-- page-banner-area-start -->
+<div class="page-banner-area page-banner-height-2" data-background="{% static 'assets/img/banner/page-banner-4.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="page-banner-content text-center">
+                    <h4 class="breadcrumb-title">My account</h4>
+                    <div class="breadcrumb-two">
+                        <nav>
+                            <nav class="breadcrumb-trail breadcrumbs">
+                                <ul class="breadcrumb-menu">
+                                    <li class="breadcrumb-trail">
+                                        <a href="index.html"><span>Home</span></a>
+                                    </li>
+                                    <li class="trail-item">
+                                        <span>My account</span>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page-banner-area-end -->
+<!-- account-area-start -->
+<!-- account-area-start -->
+<div class="account-area mt-70 mb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="basic-login mb-50">
+                    <h5>Login</h5>
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                    <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Failure!</strong> {{message}}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    <form action="{% url 'login' %}" method="post">
+                        {% csrf_token %}
+                        <label for="name">Username or e
+                            mail address <span>*</span></label>
+                        <input id="name" type="text" name="username" placeholder="Enter Username">
+                        <label for="pass">Password <span>*</span></label>
+                        <input id="pass" name="password" type="password" placeholder="Enter password...">
+                        <div class="login-action mb-10 fix">
+                            <span class="log-rem f-left">
+                                <input id="remember" type="checkbox">
+                                <label for="remember">Remember me</label>
+                            </span>
+                            <span class="forgot-login f-right">
+                                <a href="#">Lost your password?</a>
+                            </span>
+                        </div>
+                        <button type="submit" class="tp-in-btn w-100"> Log in </button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h5>Register</h5>
+                <div class="basic-login">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Success!</strong> {{message}}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+
+
+
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <label for="username">Username or email address <span>*</span></label>
+                        {{ form.username }}
+                        {% if form.username.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.username.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+
+
+                        <!-- <input id="username" type="text" name="username" placeholder="Enter Username"> -->
+                        <label for="firstname">Name <span>*</span></label>
+                        {{ form.name }}
+                        {% if form.name.errors %}
+                        <ul class="alert alert-success text-danger">
+                            {% for error in form.name.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <label for="age">address <span>*</span></label>
+                        {{ form.address }}
+                        {% if form.address.errors %}
+                        <ul class="alert alert-success text-danger">
+                            {% for error in form.address.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <!-- <input id="firstname" type="text" name="firstname" placeholder="Enter Firstname"> -->
+                        <label for="email-id">Email Address <span>*</span></label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                        <ul class="alert alert-success text-danger">
+                            {% for error in form.email.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <!-- <input id="email-id" type="text" name="email" placeholder="Email address..."> -->
+                        <label for="userpass">Password <span>*</span></label>
+                        {{ form.password1 }}
+                        {% if form.password1.errors %}
+                        <ul class="alert alert-success text-danger">
+                            {% for error in form.password1.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                        <!-- <input id="userpass" type="password" name="password" placeholder="Enter password..."> -->
+                        <label for="userpass">Confirm Password <span>*</span></label>
+                        {{ form.password2 }}
+                        {% if form.password2.errors %}
+                        <ul class="alert alert-success text-danger">
+                            {% for error in form.password2.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                        <!-- <input id="userpass" type="password" name="password" placeholder="Enter password..."> -->
+
+                        <input type="submit" class="tp-in-btn w-100" value="Register">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Automatically close the success alert after 4 seconds
+    setTimeout(function () {
+        $("#success-alert").alert('close');
+    }, 8000); // 4000 milliseconds (4 seconds)
+</script>
+<!-- account-area-end -->
+{% endblock content %}
